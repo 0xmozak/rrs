@@ -145,13 +145,9 @@ impl MemorySpace {
 
     // Gets the memory region that covers an address if it exists.
     fn get_memory_region_by_addr(&mut self, addr: u32) -> Option<&mut MemoryRegion> {
-        for memory_region in self.memory_regions.iter_mut() {
-            if (addr >= memory_region.base) && (addr < (memory_region.base + memory_region.size)) {
-                return Some(memory_region);
-            }
-        }
-
-        None
+        self.memory_regions.iter_mut().find(|memory_region| {
+            (addr >= memory_region.base) && (addr < (memory_region.base + memory_region.size))
+        })
     }
 
     /// Add an inner memory.
