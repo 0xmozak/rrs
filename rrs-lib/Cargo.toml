@@ -13,6 +13,6 @@ repository = "https://github.com/GregAC/rrs/tree/main/rrs-lib"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-paste = "1.0"
-downcast-rs = "1.2.1"
-num_enum = "0.7.2"
+paste = "1"
+downcast-rs = "1"
+num_enum = "0"
