@@ -47,7 +47,7 @@
 //! );
 //! ```
 
-use super::csrs::{CSRAddr, ExceptionCause, MIx, PrivLevel};
+use super::csrs::{ExceptionCause, MIx, PrivLevel};
 use super::instruction_formats;
 use super::process_instruction;
 use super::CSR;

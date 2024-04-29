@@ -40,8 +40,8 @@ fn get_arg_matches() -> ArgMatches<'static> {
     .get_matches()
 }
 
-fn process_u32_arg<'a>(
-    args: &ArgMatches<'a>,
+fn process_u32_arg(
+    args: &ArgMatches<'_>,
     name: &str,
     base: u32,
     default: u32,
@@ -123,11 +123,7 @@ impl Memory for SimulationCtrlDevice {
     }
 
     fn write_mem(&mut self, _addr: u32, _size: MemAccessSize, store_data: u32) -> bool {
-        if store_data != 0 {
-            self.stop = true;
-        } else {
-            self.stop = false;
-        }
+        self.stop = store_data != 0;
 
         true
     }
