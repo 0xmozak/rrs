@@ -145,13 +145,9 @@ impl MemorySpace {
 
     // Gets the memory region that covers an address if it exists.
     fn get_memory_region_by_addr(&mut self, addr: u32) -> Option<&mut MemoryRegion> {
-        for memory_region in self.memory_regions.iter_mut() {
-            if (addr >= memory_region.base) && (addr < (memory_region.base + memory_region.size)) {
-                return Some(memory_region);
-            }
-        }
-
-        None
+        self.memory_regions.iter_mut().find(|memory_region| {
+            (addr >= memory_region.base) && (addr < (memory_region.base + memory_region.size))
+        })
     }
 
     /// Add an inner memory.
@@ -245,17 +241,11 @@ mod tests {
             Some(0xbaadf00d)
         );
 
-        assert_eq!(test_mem.write_mem(0x7, MemAccessSize::Byte, 0xff), true);
+        assert!(test_mem.write_mem(0x7, MemAccessSize::Byte, 0xff));
 
-        assert_eq!(
-            test_mem.write_mem(0x2, MemAccessSize::HalfWord, 0xaaaaface),
-            true
-        );
+        assert!(test_mem.write_mem(0x2, MemAccessSize::HalfWord, 0xaaaaface));
 
-        assert_eq!(
-            test_mem.write_mem(0x1, MemAccessSize::Byte, 0x1234abcd),
-            true
-        );
+        assert!(test_mem.write_mem(0x1, MemAccessSize::Byte, 0x1234abcd));
 
         assert_eq!(
             test_mem.read_mem(0x0, MemAccessSize::Word),
@@ -269,7 +259,7 @@ mod tests {
 
         assert_eq!(test_mem.read_mem(0x8, MemAccessSize::Word), None);
 
-        assert_eq!(test_mem.write_mem(0x8, MemAccessSize::Word, 0x0), false);
+        assert!(!test_mem.write_mem(0x8, MemAccessSize::Word, 0x0));
     }
 
     struct TestMemory;
@@ -341,15 +331,9 @@ mod tests {
             Some(0x44444444)
         );
 
-        assert_eq!(
-            test_mem_space.write_mem(0x208, MemAccessSize::Word, 0xffffffff),
-            true
-        );
+        assert!(test_mem_space.write_mem(0x208, MemAccessSize::Word, 0xffffffff));
 
-        assert_eq!(
-            test_mem_space.write_mem(0x20c, MemAccessSize::Word, 0xffffffff),
-            false
-        );
+        assert!(!test_mem_space.write_mem(0x20c, MemAccessSize::Word, 0xffffffff));
 
         assert_eq!(test_mem_space.read_mem(0x108, MemAccessSize::Word), None);
 

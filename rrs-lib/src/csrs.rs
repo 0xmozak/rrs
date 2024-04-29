@@ -156,15 +156,10 @@ impl CSR for MIsa {
     fn write(&mut self, _val: u32) {}
 }
 
+#[derive(Default)]
 pub struct MVendorID {
     pub bank: u32,
     pub offset: u32,
-}
-
-impl Default for MVendorID {
-    fn default() -> Self {
-        MVendorID { bank: 0, offset: 0 }
-    }
 }
 
 impl CSR for MVendorID {
@@ -217,18 +212,10 @@ impl CSR for MStatus {
     }
 }
 
+#[derive(Default)]
 pub struct MTVec {
     pub base: u32,
     pub vectored_mode: bool,
-}
-
-impl Default for MTVec {
-    fn default() -> Self {
-        MTVec {
-            base: 0,
-            vectored_mode: false,
-        }
-    }
 }
 
 impl CSR for MTVec {
@@ -248,20 +235,11 @@ impl CSR for MTVec {
     }
 }
 
+#[derive(Default)]
 pub struct MIx {
     pub external: bool,
     pub timer: bool,
     pub software: bool,
-}
-
-impl Default for MIx {
-    fn default() -> Self {
-        MIx {
-            external: false,
-            timer: false,
-            software: false,
-        }
-    }
 }
 
 impl CSR for MIx {
@@ -290,18 +268,10 @@ impl CSR for MIx {
     }
 }
 
+#[derive(Default)]
 pub struct MCountInhibit {
     pub cycle: bool,
     pub instret: bool,
-}
-
-impl Default for MCountInhibit {
-    fn default() -> Self {
-        MCountInhibit {
-            cycle: false,
-            instret: false,
-        }
-    }
 }
 
 impl CSR for MCountInhibit {
@@ -339,14 +309,9 @@ pub enum ExceptionCause {
     ECallMMode = 0xb,
 }
 
+#[derive(Default)]
 pub struct MCause {
     pub cause: u32,
-}
-
-impl Default for MCause {
-    fn default() -> Self {
-        MCause { cause: 0 }
-    }
 }
 
 impl CSR for MCause {

@@ -227,7 +227,7 @@ mod tests {
     use super::instruction_string_outputter::InstructionStringOutputter;
     use super::*;
 
-    fn run_insns<'a, M: Memory>(executor: &mut InstructionExecutor<'a, M>, end_pc: u32) {
+    fn run_insns<M: Memory>(executor: &mut InstructionExecutor<'_, M>, end_pc: u32) {
         while executor.hart_state.pc != end_pc {
             let mut outputter = InstructionStringOutputter {
                 insn_pc: executor.hart_state.pc,
@@ -329,6 +329,6 @@ mod tests {
 
         assert_eq!(hart.csr_set.mscratch.val, 0xbaadf00d);
         assert_eq!(hart.csr_set.mtvec.base, 0x1234abc0);
-        assert_eq!(hart.csr_set.mtvec.vectored_mode, true);
+        assert!(hart.csr_set.mtvec.vectored_mode);
     }
 }
