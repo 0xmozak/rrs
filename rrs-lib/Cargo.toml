@@ -14,5 +14,5 @@ repository = "https://github.com/GregAC/rrs/tree/main/rrs-lib"
 
 [dependencies]
 paste = "1"
-downcast-rs = "1"
+downcast-rs = "2"
 num_enum = "0"
